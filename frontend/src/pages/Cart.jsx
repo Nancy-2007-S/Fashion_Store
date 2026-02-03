@@ -3,34 +3,35 @@ import { ShopContext } from '../context/ShopContext';
 import Title from '../components/Title';
 import { assets } from '../assets/assets';
 import CartTotal from '../components/CartTotal';
+import '../styles/Cart.css';
 
 const Cart = () => {
   const { products, currency, cartItems, updateQuantity, navigate } = useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
 
   useEffect(() => {
-if (products.length>0) {
+    if (products.length > 0) {
       const tempData = [];
-    for (const items in cartItems) {
-      for (const item in cartItems[items]) {
-        if (cartItems[items][item] > 0) {
-          tempData.push({
-            _id: items,
-            size: item,
-            quantity: cartItems[items][item],
-          });
+      for (const items in cartItems) {
+        for (const item in cartItems[items]) {
+          if (cartItems[items][item] > 0) {
+            tempData.push({
+              _id: items,
+              size: item,
+              quantity: cartItems[items][item],
+            });
+          }
         }
       }
+      setCartData(tempData);
     }
-    setCartData(tempData);
-}
-  }, [cartItems,products]);
+  }, [cartItems, products]);
 
   const isCartEmpty = cartData.length === 0;
 
   return (
-    <div className='border-t pt-14'>
-      <div className='mb-3 text-2xl'>
+    <div className='cart-container'>
+      <div className='cart-title'>
         <Title text1={'YOUR'} text2={'CART'} />
       </div>
       <div>
@@ -38,43 +39,43 @@ if (products.length>0) {
           const productData = products.find((product) => product._id === item._id);
 
           return (
-            <div key={index} className='grid py-4 text-gray-700 border-t border-b grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4'>
-              <div className='flex items-start gap-6'>
-                <img className='w-16 sm:w-20' src={productData.image[0]} alt="Photo" />
-                <div>
-                  <p className='text-sm font-medium sm:text-lg'>{productData.name}</p>
-                  <div className='flex items-center gap-5 mt-2'>
+            <div key={index} className='cart-item'>
+              <div className='cart-item-info'>
+                <img className='cart-item-image' src={productData.image[0]} alt="Photo" />
+                <div className='cart-item-details'>
+                  <p className='cart-item-name'>{productData.name}</p>
+                  <div className='cart-item-price-size'>
                     <p>
                       {currency}&nbsp;{productData.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </p>
-                    <p className='px-2 border sm:px-3 sm:py-1 bg-slate-50'>{item.size}</p>
+                    <p className='cart-item-size'>{item.size}</p>
                   </div>
                 </div>
               </div>
               <input
-                onChange={(e) => e.target.value === '' || e.target.value === '0' ? null : updateQuantity(item._id, item.size, Number(e.target.value))} 
-                className='px-1 py-1 border max-w-10 sm:max-w-20 sm:px-2' 
-                type="number" 
-                min={1} 
-                defaultValue={item.quantity} 
+                onChange={(e) => e.target.value === '' || e.target.value === '0' ? null : updateQuantity(item._id, item.size, Number(e.target.value))}
+                className='cart-quantity-input'
+                type="number"
+                min={1}
+                defaultValue={item.quantity}
               />
-              <img 
-                onClick={() => updateQuantity(item._id, item.size, 0)} 
-                className='w-4 mr-4 cursor-pointer sm:w-5' 
-                src={assets.bin_icon} 
-                alt="Remove" 
+              <img
+                onClick={() => updateQuantity(item._id, item.size, 0)}
+                className='cart-remove-icon'
+                src={assets.bin_icon}
+                alt="Remove"
               />
             </div>
           );
         })}
       </div>
-      <div className='flex justify-end my-20'>
-        <div className='w-full sm:w-[450px]'>
+      <div className='cart-total-section'>
+        <div className='cart-total-wrapper'>
           <CartTotal />
-          <div className='w-full text-end'>
-            <button 
-              onClick={() => navigate('/place-order')} 
-              className={`px-8 py-3 my-8 text-sm text-white bg-black active:bg-gray-700 ${isCartEmpty ? 'opacity-50 cursor-not-allowed' : ''}`}
+          <div className='cart-checkout-btn-container'>
+            <button
+              onClick={() => navigate('/place-order')}
+              className='cart-checkout-btn'
               disabled={isCartEmpty}
             >
               PROCEED TO CHECKOUT

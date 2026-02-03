@@ -1,26 +1,44 @@
 import React from 'react'
 import Title from '../components/Title'
 import { assets } from '../assets/assets'
-import NewsLetterBox from '../components/NewsLetterBox'
+import '../styles/Contact.css';
 
 const Contact = () => {
   return (
-    <div>
-      <div className='pt-10 text-2xl text-center border-t'>
+    <div className='contact-main'>
+      <div className='contact-header'>
         <Title text1={'CONTACT'} text2={'US'} />
       </div>
-      <div className='flex flex-col justify-center gap-10 my-10 md:flex-row mb-28'>
-        <img className='w-full md:max-w-[480px]' src={assets.contact_img} alt="Contact Photo" />
-        <div className='flex flex-col items-start justify-center gap-6'>
-          <p className='text-xl font-semibold text-gray-600'>Our Store</p>
-          <p className='text-gray-500'>Trendify 354 Fashion Lane <br />Los Angeles, SC 45678, USA</p>
-          <p className='text-gray-500'>Tel: (+11)-558-669-447 <br />Email: contact.trendify@info.com</p>
-          <p className='text-xl font-semibold text-gray-600'>Careers at Forever</p>
-          <p className='text-gray-500'>Join us at Trendify! Explore job openings and help shape the future of fashion. <br />Explore our current job openings and discover how you can contribute to our mission of setting trends and creating style.</p>
-          <button className='px-8 py-4 text-sm transition-all duration-500 border border-black hover:bg-gray-800 hover:text-white'>Explore Jobs</button>
+
+      <div className='contact-content'>
+        <img className='contact-image' src={assets.contact_img} alt="Contact" />
+
+        <div className='contact-info'>
+          <div className='contact-section-group'>
+            <p className='contact-info-title'>Our Flagship Store</p>
+            <p className='contact-info-text'>
+              Trendify HQ, 354 Fashion Lane<br />
+              Los Angeles, CA 90210, USA
+            </p>
+          </div>
+
+          <div className='contact-section-group'>
+            <p className='contact-info-title'>Direct Connect</p>
+            <p className='contact-info-text'>
+              Tel: (+1) 555-0123-447<br />
+              Email: hello@trendify.com
+            </p>
+          </div>
+
+          <div className='contact-section-group'>
+            <p className='contact-info-title'>Careers at Trendify</p>
+            <p className='contact-info-text'>
+              Join our dynamic team and help shape the future of global fashion.
+            </p>
+            <button className='contact-button'>Explore Opportunities</button>
+          </div>
         </div>
       </div>
-      <NewsLetterBox />
     </div>
   )
 }

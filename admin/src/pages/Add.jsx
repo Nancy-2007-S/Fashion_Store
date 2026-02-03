@@ -4,6 +4,8 @@ import axios from "axios";
 import { backendUrl } from "../App";
 import { toast } from "react-toastify";
 
+import "../styles/Add.css";
+
 const Add = ({ token }) => {
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
@@ -71,14 +73,14 @@ const Add = ({ token }) => {
   return (
     <form
       onSubmit={onSubmitHandler}
-      className="flex flex-col items-start w-full gap-3"
+      className="add-form"
     >
       <div>
-        <p className="mb-2 text-lg font-semibold">Upload Product Image(s)</p>
-        <div className="flex gap-2">
-          <label htmlFor="image1">
+        <p className="add-label-title">Upload Product Image(s)</p>
+        <div className="add-img-upload-container">
+          <label htmlFor="image1" className="add-img-label">
             <img
-              className="w-20 border-2 border-gray-500 rounded-lg cursor-pointer"
+              className="add-img-preview"
               src={!image1 ? assets.upload_area : URL.createObjectURL(image1)}
               alt="Upload Images"
             />
@@ -90,9 +92,9 @@ const Add = ({ token }) => {
               accept="image/*"
             />
           </label>
-          <label htmlFor="image2">
+          <label htmlFor="image2" className="add-img-label">
             <img
-              className="w-20 border-2 border-gray-500 rounded-lg cursor-pointer"
+              className="add-img-preview"
               src={!image2 ? assets.upload_area : URL.createObjectURL(image2)}
               alt="Upload Images"
             />
@@ -104,9 +106,9 @@ const Add = ({ token }) => {
               accept="image/*"
             />
           </label>
-          <label htmlFor="image3">
+          <label htmlFor="image3" className="add-img-label">
             <img
-              className="w-20 border-2 border-gray-500 rounded-lg cursor-pointer"
+              className="add-img-preview"
               src={!image3 ? assets.upload_area : URL.createObjectURL(image3)}
               alt="Upload Images"
             />
@@ -118,9 +120,9 @@ const Add = ({ token }) => {
               accept="image/*"
             />
           </label>
-          <label htmlFor="image4">
+          <label htmlFor="image4" className="add-img-label">
             <img
-              className="w-20 border-2 border-gray-500 rounded-lg cursor-pointer"
+              className="add-img-preview"
               src={!image4 ? assets.upload_area : URL.createObjectURL(image4)}
               alt="Upload Images"
             />
@@ -134,35 +136,35 @@ const Add = ({ token }) => {
           </label>
         </div>
       </div>
-      <div className="w-full mt-2">
-        <p className="mb-2 text-lg font-semibold">Product Item Name</p>
+      <div className="add-input-wrapper">
+        <p className="add-label-title">Product Item Name</p>
         <input
           onChange={(e) => setName(e.target.value)}
           value={name}
-          className="w-full px-3 py-2 border-gray-500 max-w-[500px]"
+          className="add-input"
           type="text"
           placeholder="Enter Product Name"
           required
         />
       </div>
-      <div className="w-full mt-2">
-        <p className="mb-2 text-lg font-semibold">Product Item Description</p>
+      <div className="add-input-wrapper">
+        <p className="add-label-title">Product Item Description</p>
         <textarea
           onChange={(e) => setDescription(e.target.value)}
           value={description}
-          className="w-full px-3 py-2 border-gray-500 max-w-[500px]"
+          className="add-textarea"
           type="text"
           placeholder="Enter Product Description"
           required
         />
       </div>
-      <div className="flex flex-col w-full gap-2 sm:flex-row sm:gap-8">
+      <div className="add-row-group">
         <div>
-          <p className="mb-2 text-lg font-semibold">Product Category</p>
+          <p className="add-label-title">Product Category</p>
           <select
             onChange={(e) => setCategory(e.target.value)}
             value={category}
-            className="w-full px-3 py-2 border-gray-500 max-w-[500px]"
+            className="add-select"
             required
           >
             <option value="">Select Category</option>
@@ -172,11 +174,11 @@ const Add = ({ token }) => {
           </select>
         </div>
         <div>
-          <p className="mb-2 text-lg font-semibold">Product Sub Category</p>
+          <p className="add-label-title">Product Sub Category</p>
           <select
             onChange={(e) => setSubCategory(e.target.value)}
             value={subCategory}
-            className="w-full px-3 py-2 border-gray-500 max-w-[500px]"
+            className="add-select"
             required
           >
             <option value="">Select Sub Category</option>
@@ -186,11 +188,11 @@ const Add = ({ token }) => {
           </select>
         </div>
         <div>
-          <p className="mb-2 text-lg font-semibold">Product Price</p>
+          <p className="add-label-title">Product Price</p>
           <input
             onChange={(e) => setPrice(e.target.value)}
             value={price}
-            className="w-full px-3 py-2 border-gray-500 max-w-[500px]"
+            className="add-input"
             type="number"
             placeholder="Enter Product Price"
             required
@@ -198,8 +200,8 @@ const Add = ({ token }) => {
         </div>
       </div>
       <div>
-        <p className="mb-2 text-lg font-semibold">Product Sizes</p>
-        <div className="flex gap-3">
+        <p className="add-label-title">Product Sizes</p>
+        <div className="add-sizes-container">
           {["S", "M", "L", "XL", "XXL"].map((size) => (
             <div
               key={size}
@@ -212,11 +214,10 @@ const Add = ({ token }) => {
               }
             >
               <p
-                className={`${
-                  sizes.includes(size)
-                    ? "bg-gray-500 text-white rounded-md"
-                    : "bg-slate-200"
-                } px-3 py-1 cursor-pointer`}
+                className={`add-size-btn ${sizes.includes(size)
+                    ? "active"
+                    : ""
+                  }`}
               >
                 {size}
               </p>
@@ -224,27 +225,27 @@ const Add = ({ token }) => {
           ))}
         </div>
       </div>
-      <div className="flex gap-2 mt-2">
+      <div className="add-checkbox-row">
         <input
           type="checkbox"
           id="bestSeller"
           checked={bestSeller}
           onChange={() => setBestSeller((prev) => !prev)}
         />
-        <label htmlFor="bestSeller" className="ml-2 cursor-pointer">
+        <label htmlFor="bestSeller" className="add-checkbox-label">
           Add to Best Seller
         </label>
       </div>
-      <div className="flex flex-col w-full gap-2 sm:flex-row sm:gap-8">
+      <div className="add-row-group">
         <button
           type="submit"
-          className="px-5 py-2 mt-2 text-white rounded-lg bg-slate-700"
+          className="add-btn"
         >
           Add Product
         </button>
         <button
           type="button"
-          className="px-5 py-2 mt-2 text-white rounded-lg bg-slate-700"
+          className="add-btn"
           onClick={resetForm}
         >
           Reset Details

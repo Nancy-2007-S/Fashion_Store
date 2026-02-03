@@ -2,39 +2,36 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ShopContext } from '../context/ShopContext'
 import { assets } from '../assets/assets';
 import { useLocation } from 'react-router-dom';
+import '../styles/SearchBar.css';
 
 const SearchBar = () => {
 
-    const {search, setSearch, showSearch, setShowSearch} = useContext(ShopContext);
-    const [visible, setVisible] = useState(false);
+    const { search, setSearch, showSearch, setShowSearch } = useContext(ShopContext);
     const location = useLocation();
 
-    useEffect(() => {
-        if (location.pathname.includes('collection')) {
-            setVisible(true)
-        } else {
-            setVisible(false)
-        }
-    }, [location]);
+    // The search bar is now globally visible whenever showSearch is true.
+    // We only hide it automatically if the user navigates away from pages where search makes sense, 
+    // but the user's request was for "search bar too" implying general access.
+    // I will keep it simple and just remove the restricted logic.
 
-  return showSearch && visible ? (
-    <div className='text-center border-t border-b bg-gray-50'>
-        <div className='inline-flex items-center justify-center w-3/4 px-5 py-2 mx-3 my-5 border border-gray-400 rounded-full sm:w-1/2'>
-            <input 
-                value={search} 
-                onChange={(e) => setSearch(e.target.value)} 
-                className='flex-1 text-sm outline-none bg-inherit' 
-                type="text" placeholder='Search...' 
+    return showSearch ? (
+        <div className='search-bar-container'>
+            <div className='search-input-wrapper'>
+                <input
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className='search-input'
+                    type="text" placeholder='Search...'
+                />
+                <img className='search-icon' src={assets.search_icon} alt="Search" />
+            </div>
+            <img
+                onClick={() => setShowSearch(false)}
+                className='search-close-icon'
+                src={assets.cross_icon} alt="Close"
             />
-            <img className='w-4' src={assets.search_icon} alt="Search" />
         </div>
-        <img 
-            onClick={() => setShowSearch(false)} 
-            className='inline w-3 cursor-pointer' 
-            src={assets.cross_icon} alt="Close" 
-        />
-    </div>
-  ) : null
+    ) : null
 }
 
 export default SearchBar

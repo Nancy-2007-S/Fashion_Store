@@ -1,0 +1,116 @@
+/* Form Container */
+.add-form,
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 800px;
+}
+
+/* Section Title */
+.add-label-title,
+.edit-label-title {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+/* Image Upload Section */
+.add-img-upload-container,
+.edit-img-upload-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.add-img-preview,
+.edit-img-preview {
+    width: 6rem;
+    height: 6rem;
+    border: 2px dashed var(--border-color);
+    border-radius: 1rem;
+    cursor: pointer;
+    object-fit: cover;
+    transition: all 0.2s;
+}
+
+.add-img-preview:hover,
+.edit-img-preview:hover {
+    border-color: var(--primary-color);
+    background-color: #f8fafc;
+}
+
+/* Row for Category/Price */
+.add-row-group,
+.edit-row-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* Sizes */
+.add-sizes-container,
+.edit-sizes-container {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.add-size-btn,
+.edit-size-btn {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    background-color: #f1f5f9;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+}
+
+.add-size-btn:hover,
+.edit-size-btn:hover {
+    background-color: #e2e8f0;
+}
+
+.add-size-btn.active,
+.edit-size-btn.active {
+    background-color: var(--text-main);
+    color: #ffffff;
+}
+
+/* Checkbox Row */
+.add-checkbox-row,
+.edit-checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+}
+
+.add-checkbox-label,
+.edit-checkbox-label {
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* Buttons */
+.add-btn,
+.edit-btn {
+    align-self: flex-start;
+    padding: 0.75rem 2rem;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.add-btn:hover,
+.edit-btn:hover {
+    background-color: #2563eb;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,107 @@
+/* List Container */
+.list-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Base grid layout for header and rows */
+.list-grid-layout {
+    display: grid;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Header Specifics */
+.list-header {
+    display: none;
+    background-color: #f8fafc;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-top: 1px solid var(--border-color);
+}
+
+@media (min-width: 1024px) {
+    .list-header {
+        display: grid;
+        grid-template-columns: 0.5fr 2fr 3fr 1fr 1fr 1fr 1fr;
+    }
+
+    .list-row {
+        grid-template-columns: 0.5fr 2fr 3fr 1fr 1fr 1fr 1fr;
+    }
+}
+
+/* Row Specifics */
+.list-row {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    transition: background-color 0.2s;
+}
+
+.list-row:hover {
+    background-color: #f1f5f9;
+}
+
+/* Image */
+.list-img {
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+}
+
+/* Text alignment */
+.list-text-left {
+    text-align: left;
+}
+
+/* Action Button Container */
+.list-action-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* Button Base */
+.list-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+    font-size: 0.8rem;
+    background-color: transparent;
+}
+
+/* Edit Button */
+.list-btn-edit {
+    color: var(--primary-color);
+    border: 1px solid #dbeafe;
+    background-color: #eff6ff;
+}
+
+.list-btn-edit:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Remove Button */
+.list-btn-remove {
+    color: #ef4444;
+    border: 1px solid #fee2e2;
+    background-color: #fef2f2;
+}
+
+.list-btn-remove:hover {
+    background-color: #ef4444;
+    color: white;
+}

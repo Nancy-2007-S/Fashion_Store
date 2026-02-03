@@ -4,6 +4,8 @@ import axios from "axios";
 import { backendUrl } from "../App";
 import { toast } from "react-toastify";
 
+import "../styles/Login.css";
+
 const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,42 +26,42 @@ const Login = ({ setToken }) => {
       }
     } catch (error) {
       console.error(error);
-      toast.error("Please try again later.");
+      toast.error(error.response?.data?.message || "Please try again later.");
     }
   };
 
   return (
-    <div className="flex items-center justify-center w-full min-h-screen">
-      <div className="max-w-md px-8 py-6 bg-white rounded-lg shadow-md">
-        <div className="mb-3 w-fit">
+    <div className="login-container">
+      <div className="login-card">
+        <div className="login-logo-wrapper">
           <img src={assets.logo} alt="Trendify" />
         </div>
-        <h1 className="mb-4 text-2xl font-bold">Admin Dashboard</h1>
+        <h1 className="login-title">Admin Dashboard</h1>
         <form onSubmit={onSubmitHandler}>
-          <div className="mb-3 min-w-72">
-            <p className="mb-2 text-sm font-medium text-gray-700">Email</p>
+          <div className="login-form-group">
+            <p className="login-label">Email</p>
             <input
               onChange={(e) => setEmail(e.target.value)}
               value={email}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md outline-none"
+              className="login-input"
               type="email"
               placeholder="your@email.com"
               required
             />
           </div>
           <div>
-            <p className="mb-2 text-sm font-medium text-gray-700">Password</p>
+            <p className="login-label">Password</p>
             <input
               onChange={(e) => setPassword(e.target.value)}
               value={password}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md outline-none"
+              className="login-input"
               type="password"
               placeholder="Enter your password"
               required
             />
           </div>
           <button
-            className="w-full px-4 py-2 mt-5 text-white bg-black rounded-md"
+            className="login-btn"
             type="submit"
           >
             Login

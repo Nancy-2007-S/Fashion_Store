@@ -1,0 +1,75 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 24rem;
+    /* sm:max-w-96 (96 * 0.25rem = 24rem) */
+    margin: 3.5rem auto auto;
+    /* mt-14 (14 * 0.25 = 3.5), m-auto */
+    gap: 1rem;
+    /* gap-4 */
+    color: #1f2937;
+    /* text-gray-800 */
+}
+
+.login-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* gap-2 */
+    margin-top: 2.5rem;
+    /* mt-10 */
+    margin-bottom: 0.5rem;
+    /* mb-2 */
+}
+
+.login-title {
+    font-size: 1.875rem;
+    /* text-3xl */
+    line-height: 2.25rem;
+    /* prata-regular is likely a font family defined globally or imported, assuming it remains accessible */
+}
+
+.login-divider {
+    border: none;
+    height: 1.5px;
+    width: 2rem;
+    /* w-8 */
+    background-color: #1f2937;
+    /* bg-gray-800 */
+}
+
+.login-input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    /* px-3 py-2 */
+    border: 1px solid #1f2937;
+    /* border border-gray-800 */
+}
+
+.login-links {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.875rem;
+    /* text-sm */
+    margin-top: -8px;
+}
+
+.login-link-text {
+    cursor: pointer;
+}
+
+.login-button {
+    padding: 0.5rem 2rem;
+    /* px-8 py-2 */
+    margin-top: 1rem;
+    /* mt-4 */
+    font-weight: 300;
+    /* font-light */
+    color: white;
+    background-color: black;
+    border: none;
+    cursor: pointer;
+}

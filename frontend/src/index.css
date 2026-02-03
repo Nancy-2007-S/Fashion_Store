@@ -1,29 +1,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-* {
-    font-family: Outfit;
+:root {
+    --primary-color: #1a1a1a;
+    --bg-light: #ffffff;
+    --bg-subtle: #f9fafb;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --border-color: #e5e7eb;
+    --accent-color: #3b82f6;
+    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --shadow-premium: 0 10px 15px -3px rgba(0, 0, 0, 0.03), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
 }
 
-a.active hr {
-    @apply block;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Outfit", sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
 }
 
 .prata-regular {
     font-family: "Prata", serif;
     font-weight: 400;
-    font-style: normal;
 }
 
+/* Custom Slim Scrollbar */
 ::-webkit-scrollbar {
-    display: none;
+    width: 6px;
 }
 
-@media (max-width:640px) {
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e1;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s ease;
+}
+
+a.active hr {
+    display: block;
+}
+
+@media (max-width: 640px) {
     a.active {
-        @apply text-white bg-black;
+        color: white;
+        background-color: black;
     }
 }

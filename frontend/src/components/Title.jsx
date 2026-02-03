@@ -1,14 +1,15 @@
 import React from 'react'
+import '../styles/Title.css';
 
-const Title = ({text1, text2}) => {
+const Title = ({ text1, text2 }) => {
   return (
-    <div className='inline-flex items-center gap-2 mb-3'>
-        <p className='text-gray-500'>
-            {text1}
-            &nbsp;
-            <span className='font-medium text-gray-700'>{text2}</span>
-        </p>
-        <p className='w-8 sm:w-12 h-[1px] sm:h-[2px] bg-gray-700'></p>
+    <div className='title-container'>
+      <p className='title-text'>
+        {text1}
+        &nbsp;
+        <span className='title-highlight'>{text2}</span>
+      </p>
+      <p className='title-line'></p>
     </div>
   )
 }

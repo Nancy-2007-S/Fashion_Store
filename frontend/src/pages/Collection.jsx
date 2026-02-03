@@ -3,6 +3,7 @@ import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/assets";
 import Title from "../components/Title";
 import ProductItem from "../components/ProductItem";
+import '../styles/Collection.css';
 
 const Collection = () => {
   const { products, search, showSearch } = useContext(ShopContext);
@@ -74,19 +75,19 @@ const Collection = () => {
 
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory, search, showSearch,products]);
+  }, [category, subCategory, search, showSearch, products]);
 
   useEffect(() => {
     sortProduct();
   }, [sortType]);
 
   return (
-    <div className="flex flex-col gap-1 pt-10 border-t sm:flex-row sm:gap-10">
+    <div className="collection-flex">
       {/* Filter Options */}
-      <div className="min-w-60">
+      <div className="collection-filters">
         <p
           onClick={() => setShowFilter(!showFilter)}
-          className="flex items-center gap-2 my-2 text-xl cursor-pointer"
+          className="collection-filter-title"
         >
           FILTERS
           <img
@@ -95,17 +96,14 @@ const Collection = () => {
             alt="Dropdown"
           />
         </p>
+
         {/* Category Filters */}
-        <div
-          className={`border border-gray-300 pl-5 py-3 mt-6 ${
-            showFilter ? "" : "hidden"
-          } sm:block`}
-        >
-          <p className="mb-3 text-sm font-medium">CATEGORIES</p>
-          <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
-            <label className="flex gap-2 cursor-pointer">
+        <div className={`filter-category-box ${showFilter ? "" : "hidden"} sm:block`}>
+          <p className="filter-group-title">CATEGORIES</p>
+          <div className="filter-options-list">
+            <label className="filter-option-label">
               <input
-                className="w-3"
+                className="filter-checkbox"
                 type="checkbox"
                 value={"Men"}
                 onChange={toggleCategory}
@@ -113,9 +111,9 @@ const Collection = () => {
               />
               Men
             </label>
-            <label className="flex gap-2 cursor-pointer">
+            <label className="filter-option-label">
               <input
-                className="w-3"
+                className="filter-checkbox"
                 type="checkbox"
                 value={"Women"}
                 onChange={toggleCategory}
@@ -123,9 +121,9 @@ const Collection = () => {
               />
               Women
             </label>
-            <label className="flex gap-2 cursor-pointer">
+            <label className="filter-option-label">
               <input
-                className="w-3"
+                className="filter-checkbox"
                 type="checkbox"
                 value={"Kids"}
                 onChange={toggleCategory}
@@ -135,17 +133,14 @@ const Collection = () => {
             </label>
           </div>
         </div>
+
         {/* Sub Category Filters */}
-        <div
-          className={`border border-gray-300 pl-5 py-3 my-5 ${
-            showFilter ? "" : "hidden"
-          } sm:block`}
-        >
-          <p className="mb-3 text-sm font-medium">TYPES</p>
-          <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
-            <label className="flex gap-2 cursor-pointer">
+        <div className={`filter-category-box ${showFilter ? "" : "hidden"} sm:block`}>
+          <p className="filter-group-title">TYPES</p>
+          <div className="filter-options-list">
+            <label className="filter-option-label">
               <input
-                className="w-3"
+                className="filter-checkbox"
                 type="checkbox"
                 value={"Topwear"}
                 onChange={toggleSubCategory}
@@ -153,9 +148,9 @@ const Collection = () => {
               />
               Topwear
             </label>
-            <label className="flex gap-2 cursor-pointer">
+            <label className="filter-option-label">
               <input
-                className="w-3"
+                className="filter-checkbox"
                 type="checkbox"
                 value={"Bottomwear"}
                 onChange={toggleSubCategory}
@@ -163,9 +158,9 @@ const Collection = () => {
               />
               Bottomwear
             </label>
-            <label className="flex gap-2 cursor-pointer">
+            <label className="filter-option-label">
               <input
-                className="w-3"
+                className="filter-checkbox"
                 type="checkbox"
                 value={"Winterwear"}
                 onChange={toggleSubCategory}
@@ -175,11 +170,10 @@ const Collection = () => {
             </label>
           </div>
         </div>
+
         {/* Clear Filters Button */}
         <button
-          className={`px-4 py-2 mt-1 text-white bg-black rounded hover:bg-gray-900 ${
-            showFilter ? "block" : "hidden"
-          } sm:block`}
+          className={`clear-filters-btn ${showFilter ? "block" : "hidden"} sm:block`}
           onClick={clearFilters}
         >
           Clear Filters
@@ -187,21 +181,22 @@ const Collection = () => {
       </div>
 
       {/* View Product Items */}
-      <div className="flex-1">
-        <div className="flex justify-between mb-4 text-base sm:text-2xl">
+      <div className="collection-main">
+        <div className="collection-top-bar">
           <Title text1={"ALL"} text2={"COLLECTIONS"} />
           {/* Product Sort */}
           <select
             onChange={(e) => setSortType(e.target.value)}
-            className="px-2 text-sm border-2 border-gray-300"
+            className="sort-select"
           >
             <option value="relevant">Sort by: Relevant</option>
             <option value="low-high">Sort by: Low to High</option>
             <option value="high-low">Sort by: High to Low</option>
           </select>
         </div>
+
         {/* Map Products */}
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 gap-y-6">
+        <div className="collection-grid">
           {filterProducts.map((item, index) => (
             <ProductItem
               key={index}

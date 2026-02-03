@@ -4,6 +4,8 @@ import { backendUrl, currency } from '../App'
 import { toast } from 'react-toastify'
 import { assets } from '../assets/assets'
 
+import "../styles/Orders.css";
+
 const Orders = ({ token }) => {
   const [orders, setOrders] = useState([])
 
@@ -45,31 +47,31 @@ const Orders = ({ token }) => {
       toast.error(error.message || "Something went wrong");
     }
   };
-  
+
   useEffect(() => {
     fetchAllOrders()
   }, [token])
 
   return (
-    <div>
-      <h3>Order Page</h3>
-      <div>
+    <div className="orders-page">
+      <h3 className="orders-title">Order Page</h3>
+      <div className="orders-list">
         {orders.map((order, index) => (
           <div
             key={index}
-            className="grid grid-cols-1 sm:grid-cols-[0.5fr_2fr_1fr] lg:grid-cols-[0.5fr_2fr_1fr_1fr_1fr] gap-3 items-start border-2 border-gray-200 p-5 md:p-8 my-3 md:my-4 text-xs sm:text-sm text-gray-700"
+            className="order-grid"
           >
-            <img className="w-12" src={assets.parcel_icon} alt="" />
+            <img className="order-icon" src={assets.parcel_icon} alt="" />
             <div>
               <div>
                 {order.items.map((item, itemIndex) => (
-                  <p className="py-0.5" key={itemIndex}>
+                  <p className="order-item-text" key={itemIndex}>
                     {item.name} x {item.quantity}{' '}
                     <span>{item.size}</span>
                   </p>
                 ))}
               </div>
-              <p className="mt-3 mb-2 font-medium">
+              <p className="order-address-name">
                 {order.address.firstName + ' ' + order.address.lastName}
               </p>
               <div>
@@ -87,29 +89,28 @@ const Orders = ({ token }) => {
               <p>{order.address.phone}</p>
             </div>
             <div>
-              <p className="text-sm sm:text-[15px]">
+              <p className="order-info-text">
                 Items : {order.items.length}
               </p>
-              <p className="mt-3">Method : {order.paymentMethod}</p>
+              <p className="order-method-text">Method : {order.paymentMethod}</p>
               <p>Payment : {order.payment ? 'Done' : 'Pending'}</p>
               <p>Date : {new Date(order.date).toLocaleDateString()}</p>
             </div>
-            <p className="text-sm sm-text-[15px]">
+            <p className="order-info-text">
               {currency}
               {order.amount} $
             </p>
             <select
-  onChange={(event) => statusHandler(event, order._id)}
-  value={order.status}
-  className="p-2 font-semibold text-black bg-white border border-gray-300 rounded"
->
-  <option value="Order Placed">Order Placed</option>
-  <option value="Paking">Paking</option>
-  <option value="Shipped">Shipped</option>
-  <option value="Out for delivery">Out for delivery</option>
-  <option value="Delivered">Delivered</option>
-</select>
-
+              onChange={(event) => statusHandler(event, order._id)}
+              value={order.status}
+              className="order-status-select"
+            >
+              <option value="Order Placed">Order Placed</option>
+              <option value="Paking">Paking</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Out for delivery">Out for delivery</option>
+              <option value="Delivered">Delivered</option>
+            </select>
           </div>
         ))}
       </div>

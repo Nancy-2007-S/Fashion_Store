@@ -1,0 +1,39 @@
+.cart-total-container {
+    width: 100%;
+    /* w-full */
+}
+
+.cart-total-title {
+    font-size: 1.5rem;
+    /* text-2xl */
+}
+
+.cart-total-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* gap-2 */
+    margin-top: 0.5rem;
+    /* mt-2 */
+    font-size: 0.875rem;
+    /* text-sm */
+}
+
+.cart-total-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-total-text {
+    font-size: 1.125rem;
+    /* text-lg */
+    font-weight: 500;
+    /* font-medium */
+}
+
+.cart-total-total-text {
+    font-size: 1.5rem;
+    /* text-2xl */
+    font-weight: 600;
+    /* font-semibold */
+}

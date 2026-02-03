@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { backendUrl, currency } from "../App";
 import { toast } from "react-toastify";
 
+import "../styles/List.css";
+
 const List = ({ token }) => {
+  const navigate = useNavigate();
   const [listProducts, setListProducts] = useState([]);
 
   const fetchListProducts = async () => {
@@ -47,9 +51,9 @@ const List = ({ token }) => {
 
   return (
     <>
-      <div className="flex flex-col gap-2">
+      <div className="list-container">
         {/* List Table Title */}
-        <div className="hidden md:grid grid-cols-[0.5fr_1fr_1.5fr_0.5fr_0.5fr_0.5fr_0.2fr] items-center py-1 px-2 border bg-gray-200 text-xl text-center">
+        <div className="list-grid-layout list-header">
           <b>Image</b>
           <b>Name</b>
           <b>Description</b>
@@ -61,21 +65,29 @@ const List = ({ token }) => {
         {/* Display Products */}
         {listProducts.map((item, index) => (
           <div
-            className="grid grid-cols-[0.5fr_1fr_1.5fr_0.5fr_0.5fr_0.5fr_0.2fr] md:grid-cols-[0.5fr_1fr_1.5fr_0.5fr_0.5fr_0.5fr_0.2fr] items-center gap-2 py-1 px-2 border text-sm text-center"
+            className="list-grid-layout list-row"
             key={index}
           >
-            <img className="w-12" src={item.image[0]} alt="Product Image" />
-            <p className="text-left">{item.name}</p>
-            <p className="text-left">{item.description}</p>
+            <img className="list-img" src={item.image[0]} alt="Product Image" />
+            <p className="list-text-left">{item.name}</p>
+            <p className="list-text-left">{item.description}</p>
             <p>{item.category}</p>
             <p>{item.subCategory}</p>
             <p>{currency(item.price)}</p>
-            <p
-              onClick={() => removeProduct(item._id)}
-              className="font-bold text-center text-gray-800 bg-red-500 rounded-full cursor-pointer md:text-center max-w-7"
-            >
-              X
-            </p>
+            <div className="list-action-container">
+              <p
+                onClick={() => navigate(`/edit/${item._id}`)}
+                className="list-action-btn list-btn-edit"
+              >
+                E
+              </p>
+              <p
+                onClick={() => removeProduct(item._id)}
+                className="list-action-btn list-btn-remove"
+              >
+                X
+              </p>
+            </div>
           </div>
         ))}
       </div>
